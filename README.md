@@ -79,7 +79,3 @@ upcomingEvents channel contains json similiar to the following:
   }
 
 ```
-
-## Full Example
-
-_Provide a full usage example based on textual configuration files (*.things, *.items, *.sitemap)._
