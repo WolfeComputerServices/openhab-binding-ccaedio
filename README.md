@@ -38,6 +38,47 @@ Student things
     |---------------|--------|--------------------------------------------------------------|
     | overdueEvents | String | Contains json with student name and array of overdue events  |
     | upcomingEvents| String | Contains json with student name and array of upcomging events|
+    
+ccaedio:student:[id]#upcomingEvents contains json similiar to the following:
+
+```json
+{
+  "student": "Bill Joe Bob",
+    "upcoming":[
+      {
+        "date":{
+          "iso":"2019-12-20",
+          "year":2019,
+          "month":12,
+          "day":20
+        },
+        "course":"English Language Arts",
+        "topic":"Researching the Holocaust: Creating Citations and Conclusion Due"
+      },
+      {
+        "date":{
+          "iso":"2019-12-21",
+          "year":2019,
+          "month":12,
+          "day":21
+        },
+        "course":"Math",
+        "topic":"END OF UNIT TEST"
+      },
+      {
+        "date":{
+          "iso":"2020-01-04",
+          "year":2020,
+          "month":1,
+          "day":4
+        },
+        "course":"History",
+        "topic":"Section 3 Quiz"
+      }
+    ]
+  }
+
+```
 
 ## Full Example
 
