@@ -27,11 +27,13 @@ Student things must have the student full name as registered at CCA. The ID can 
 ## Channels
 
 Edio Account
+
     | channel       | type   | description                                                  |
     |---------------|--------|--------------------------------------------------------------|
     | hasSchool     | Switch | If on, students at CCA have school; if off, they do not.     |
 
 Student things
+
     | channel       | type   | description                                                  |
     |---------------|--------|--------------------------------------------------------------|
     | overdueEvents | String | Contains json with student name and array of overdue events  |
