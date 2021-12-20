@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<thing:thing-descriptions bindingId="ccaedio"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:thing="https://openhab.org/schemas/thing-description/v1.0.0"
+	xsi:schemaLocation="https://openhab.org/schemas/thing-description/v1.0.0 https://openhab.org/schemas/thing-description-1.0.0.xsd">
+
+	<bridge-type id="account">
+		<label>Edio Account</label>
+		<description>Commonwealth Charter Academy Edio Account where coach/student(s) are registered.</description>
+
+		<channels>
+			<channel id="school" typeId="school-channel"/>
+		</channels>
+		<config-description>
+			<parameter name="username" type="text" required="true">
+				<label>Login Username</label>
+				<description>The coach's username for logging into the Edio system</description>
+			</parameter>
+			<parameter name="password" type="text" required="true">
+				<context>password</context>
+				<label>Login Password</label>
+				<description>The coach's password for logging into the Edio system</description>
+			</parameter>
+			<parameter name="daysToRetrieve" type="integer" min="1">
+				<label>Upcoming Days to Retrieve</label>
+				<description>Indicates how many calendar days worth of upcoming events to retrieve.</description>
+				<default>14</default>
+			</parameter>
+		</config-description>
+	</bridge-type>
+
+	<thing-type id="student">
+		<supported-bridge-type-refs>
+			<bridge-type-ref id="account"/>
+		</supported-bridge-type-refs>
+		<label>Edio Student</label>
+		<description>Defines a student in CCA's Edio system.</description>
+		<channels>
+			<channel id="overduesEvents" typeId="overdues-channel"/>
+			<channel id="upcomingEvents" typeId="upcomingEvents-channel"/>
+		</channels>
+		<representation-property>studentname</representation-property>
+		<config-description>
+			<parameter name="studentname" type="text" required="true">
+				<label>Student's Name</label>
+				<description>The name of a student on CCA's Edio system.</description>
+			</parameter>
+			<parameter name="studentid" type="integer" required="false">
+				<label>Student's Id</label>
+				<description>The id of a student on CCA's Edio system.</description>
+			</parameter>
+		</config-description>
+	</thing-type>
+
+	<!-- Sample Channel Type -->
+	<channel-type id="school-channel">
+		<item-type>Switch</item-type>
+		<label>School is Open</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
+		<description>Indicates if school is open or closed</description>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="overdues-channel">
+		<item-type>String</item-type>
+		<label>Overdues List</label>
+		<description>Overdues retrieved.</description>
+		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="upcomingEvents-channel">
+		<item-type>String</item-type>
+		<label>Upcoming events list</label>
+		<description>Upcoming event list retrieved.</description>
+		<state readOnly="true"/>
+	</channel-type>
+</thing:thing-descriptions>

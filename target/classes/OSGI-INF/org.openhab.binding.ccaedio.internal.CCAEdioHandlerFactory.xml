@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<scr:component xmlns:scr="http://www.osgi.org/xmlns/scr/v1.4.0" name="org.openhab.binding.ccaedio.internal.CCAEdioHandlerFactory" configuration-pid="binding.ccaedio" init="2">
+  <service>
+    <provide interface="org.openhab.core.thing.binding.ThingHandlerFactory"/>
+  </service>
+  <reference name="$000" interface="org.osgi.service.http.HttpService" parameter="0"/>
+  <reference name="$001" interface="org.openhab.core.storage.StorageService" parameter="1"/>
+  <implementation class="org.openhab.binding.ccaedio.internal.CCAEdioHandlerFactory"/>
+</scr:component>
