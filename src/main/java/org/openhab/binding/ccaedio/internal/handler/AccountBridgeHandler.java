@@ -82,7 +82,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         ScheduledFuture<?> localDaily = daily;
         if (localDaily != null) {
             if (!localDaily.isCancelled()) {
-                daily.cancel(true);
+                localDaily.cancel(true);
                 daily = null;
             }
         }
@@ -148,7 +148,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
             channelHandlers.add(new ChannelHandlerHasSchool(this, this.edioBridge, this.gson));
             ScheduledFuture<?> localDaily = daily;
             if (localDaily != null) {
-                daily.cancel(true);
+                localDaily.cancel(true);
                 daily = null;
             }
             daily = scheduler.scheduleWithFixedDelay(() -> {

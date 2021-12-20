@@ -1,56 +1,42 @@
 # CCAEdio Binding
 
-_Give some details about what this binding is meant for - a protocol, system, specific device._
-
-_If possible, provide some resources like pictures, a video, etc. to give an impression of what can be done with this binding. You can place such resources into a `doc` folder next to this README.md._
+This binding is meant for learning coachs of students enrolled in the Commonwealth Chart Acadamy. It provides the ability to automate based on when students are in school, if a student has any overdue events and upcoming events.
 
 ## Supported Things
 
-_Please describe the different supported things / devices within this section._
-_Which different types are supported, which models were tested etc.?_
-_Note that it is planned to generate some part of this based on the XML files within ```src/main/resources/OH-INF/thing``` of your binding._
+There are two things support: Edio Account and Edio Student.
+
+An Edio Account contains the information for the login credentials of the learning choach as well as a setting for the number of upcoming events to retrieve per day.
+
+A Student account defines a student with their full name and id as defined in Edio.
 
 ## Discovery
 
-_Describe the available auto-discovery features here. Mention for what it works and what needs to be kept in mind when using it._
+The binding will discover all students enrolled in Commonwealth Charter School and registered in the Edio system.
 
 ## Binding Configuration
 
-_If your binding requires or supports general configuration settings, please create a folder ```cfg``` and place the configuration file ```<bindingId>.cfg``` inside it. In this section, you should link to this file and provide some information about the options. The file could e.g. look like:_
-
-```
-# Configuration for the CCAEdio Binding
-#
-# Default secret key for the pairing of the CCAEdio Thing.
-# It has to be between 10-40 (alphanumeric) characters.
-# This may be changed by the user for security reasons.
-secret=openHABSecret
-```
-
-_Note that it is planned to generate some part of this based on the information that is available within ```src/main/resources/OH-INF/binding``` of your binding._
-
-_If your binding does not offer any generic configurations, you can remove this section completely._
+No binding specific configruation required.
 
 ## Thing Configuration
 
-_Describe what is needed to manually configure a thing, either through the UI or via a thing-file. This should be mainly about its mandatory and optional configuration parameters. A short example entry for a thing file can help!_
+Edio Account things must have a coaches userid and password entered. A number of upcoming (calendar) days to retreive on a daily basis can also be defined.
 
-_Note that it is planned to generate some part of this based on the XML files within ```src/main/resources/OH-INF/thing``` of your binding._
+Student things must have the student full name as registered at CCA. The ID can coptionally be entered. It is best to allow the discovery process fill in this information.
 
 ## Channels
 
-_Here you should provide information about available channel types, what their meaning is and how they can be used._
+Edio Account
+    | channel       | type   | description                                                  |
+    |---------------|--------|--------------------------------------------------------------|
+    | hasSchool     | Switch | If on, students at CCA have school; if off, they do not.     |
 
-_Note that it is planned to generate some part of this based on the XML files within ```src/main/resources/OH-INF/thing``` of your binding._
-
-| channel  | type   | description                  |
-|----------|--------|------------------------------|
-| control  | Switch | This is the control channel  |
+Student things
+    | channel       | type   | description                                                  |
+    |---------------|--------|--------------------------------------------------------------|
+    | overdueEvents | String | Contains json with student name and array of overdue events  |
+    | upcomingEvents| String | Contains json with student name and array of upcomging events|
 
 ## Full Example
 
 _Provide a full usage example based on textual configuration files (*.things, *.items, *.sitemap)._
-
-## Any custom content here!
-
-_Feel free to add additional sections for whatever you think should also be mentioned about your binding!_

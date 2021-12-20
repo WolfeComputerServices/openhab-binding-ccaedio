@@ -9,7 +9,7 @@
 		<description>Commonwealth Charter Academy Edio Account where coach/student(s) are registered.</description>
 
 		<channels>
-			<channel id="school" typeId="school-channel"/>
+			<channel id="hasSchool" typeId="hasSchool-channel"/>
 		</channels>
 		<config-description>
 			<parameter name="username" type="text" required="true">
@@ -36,7 +36,7 @@
 		<label>Edio Student</label>
 		<description>Defines a student in CCA's Edio system.</description>
 		<channels>
-			<channel id="overduesEvents" typeId="overdues-channel"/>
+			<channel id="overdueEvents" typeId="overdueEvents-channel"/>
 			<channel id="upcomingEvents" typeId="upcomingEvents-channel"/>
 		</channels>
 		<representation-property>studentname</representation-property>
@@ -53,14 +53,14 @@
 	</thing-type>
 
 	<!-- Sample Channel Type -->
-	<channel-type id="school-channel">
+	<channel-type id="hasSchool-channel">
 		<item-type>Switch</item-type>
 		<label>School is Open</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
 		<description>Indicates if school is open or closed</description>
 		<state readOnly="true"/>
 	</channel-type>
 
-	<channel-type id="overdues-channel">
+	<channel-type id="overdueEvents-channel">
 		<item-type>String</item-type>
 		<label>Overdues List</label>
 		<description>Overdues retrieved.</description>

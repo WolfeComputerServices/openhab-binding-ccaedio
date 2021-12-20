@@ -32,7 +32,6 @@ public class CCAEdioBindingConstants {
 
     // List of all Thing Type UIDs
     public static final ThingTypeUID THING_TYPE_ACCOUNT = new ThingTypeUID(BINDING_ID, "account");
-    public static final ThingTypeUID THING_TYPE_CCA = new ThingTypeUID(BINDING_ID, "cca");
     public static final ThingTypeUID THING_TYPE_STUDENT = new ThingTypeUID(BINDING_ID, "student");
 
     // List of all thing property types
@@ -45,9 +44,9 @@ public class CCAEdioBindingConstants {
 
     // List of all Channel ids
     public static final String CHANNEL_HAS_SCHOOL = "hasSchool";
-    public static final String CHANNEL_OVERDUES = "overduesEvents";
+    public static final String CHANNEL_OVERDUES = "overdueEvents";
     public static final String CHANNEL_UPCOMING = "upcomingEvents";
 
     public static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = new HashSet<>(
-            Arrays.asList(THING_TYPE_ACCOUNT, THING_TYPE_ACCOUNT, THING_TYPE_CCA, THING_TYPE_STUDENT));
+            Arrays.asList(THING_TYPE_ACCOUNT, THING_TYPE_STUDENT));
 }

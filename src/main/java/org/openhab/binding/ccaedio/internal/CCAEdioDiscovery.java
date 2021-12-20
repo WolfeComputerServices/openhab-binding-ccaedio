@@ -120,12 +120,12 @@ public class CCAEdioDiscovery extends AbstractDiscoveryService implements ThingH
         logger.debug("Discovering students");
         AccountBridgeHandler localHandler = accountHandler;
         if (localHandler != null) {
-            for (Student student : accountHandler.getEdio().getStudents()) {
+            for (Student student : localHandler.getEdio().getStudents()) {
                 int studentId = student.getId();
                 String studentName = student.getName();
                 logger.debug("Student [{}: {}] discovered.", studentId, studentName);
                 @Nullable
-                ThingUID bridgeThingUID = this.accountHandler.getThing().getUID();
+                ThingUID bridgeThingUID = localHandler.getThing().getUID();
 
                 ThingUID thingUID = new ThingUID(CCAEdioBindingConstants.THING_TYPE_STUDENT, bridgeThingUID,
                         String.valueOf(studentId));
@@ -138,8 +138,12 @@ public class CCAEdioDiscovery extends AbstractDiscoveryService implements ThingH
         Map<String, Object> properties = new HashMap<>();
         properties.put(CCAEdioBindingConstants.STUDENT_PROPERTY_ID, studentId);
         properties.put(CCAEdioBindingConstants.STUDENT_PROPERTY_NAME, studentName);
-        return DiscoveryResultBuilder.create(studentUID).withProperties(properties)
-                .withRepresentationProperty(CCAEdioBindingConstants.STUDENT_PROPERTY_ID)
-                .withBridge(accountHandler.getThing().getUID()).withLabel(studentName).build();
+        DiscoveryResultBuilder drb = DiscoveryResultBuilder.create(studentUID).withProperties(properties)
+                .withRepresentationProperty(CCAEdioBindingConstants.STUDENT_PROPERTY_ID).withLabel(studentName);
+        AccountBridgeHandler localHandler = accountHandler;
+        if (localHandler != null)
+            drb.withBridge(accountHandler.getThing().getUID());
+
+        return drb.build();
     }
 }

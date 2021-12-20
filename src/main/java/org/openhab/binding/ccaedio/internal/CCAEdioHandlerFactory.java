@@ -48,13 +48,7 @@ import com.google.gson.Gson;
 @Component(configurationPid = "binding.ccaedio", service = ThingHandlerFactory.class)
 public class CCAEdioHandlerFactory extends BaseThingHandlerFactory {
 
-    // private final HttpService httpService;
-    // private final StorageService storageService;
-    // private final Map<ThingUID, List<ServiceRegistration<?>>> discoveryServiceRegistrations = new HashMap<>();
     private final Set<AccountBridgeHandler> accountHandlers = new HashSet<>();
-    private static final Set<ThingTypeUID> SUPPORTED_THING_TYPES_UIDS = Set.of(THING_TYPE_ACCOUNT, THING_TYPE_CCA,
-            THING_TYPE_STUDENT);
-
     private static final Gson gson = new Gson();
 
     private static final Set<ICCAThingHandler> handlers = new HashSet<>();
