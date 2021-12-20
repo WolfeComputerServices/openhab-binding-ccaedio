@@ -1,6 +1,6 @@
-# CCAEdio Binding
+# CCA Edio Binding
 
-This binding is meant for learning coachs of students enrolled in the Commonwealth Chart Acadamy. It provides the ability to automate based on when students are in school, if a student has any overdue events and upcoming events.
+This binding is meant for learning coachs of students enrolled in the Commonwealth Chart Acadamy (CCA). It provides the ability to automate based on when students are in school, if a student has any overdue events and upcoming events.
 
 ## Supported Things
 
