@@ -39,7 +39,7 @@ Student things
     | overdueEvents | String | Contains json with student name and array of overdue events  |
     | upcomingEvents| String | Contains json with student name and array of upcomging events|
     
-ccaedio:student:[id]#upcomingEvents contains json similiar to the following:
+upcomingEvents channel contains json similiar to the following:
 
 ```json
 {
