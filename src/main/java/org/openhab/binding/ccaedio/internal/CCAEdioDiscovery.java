@@ -56,8 +56,9 @@ public class CCAEdioDiscovery extends AbstractDiscoveryService implements ThingH
 
     @Override
     public void setThingHandler(@Nullable ThingHandler handler) {
-        if (handler instanceof AccountBridgeHandler)
+        if (handler instanceof AccountBridgeHandler) {
             this.accountHandler = (AccountBridgeHandler) handler;
+        }
     }
 
     @Override
@@ -141,8 +142,9 @@ public class CCAEdioDiscovery extends AbstractDiscoveryService implements ThingH
         DiscoveryResultBuilder drb = DiscoveryResultBuilder.create(studentUID).withProperties(properties)
                 .withRepresentationProperty(CCAEdioBindingConstants.STUDENT_PROPERTY_ID).withLabel(studentName);
         AccountBridgeHandler localHandler = accountHandler;
-        if (localHandler != null)
-            drb.withBridge(accountHandler.getThing().getUID());
+        if (localHandler != null) {
+            drb.withBridge(localHandler.getThing().getUID());
+        }
 
         return drb.build();
     }

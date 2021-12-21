@@ -35,11 +35,6 @@ public class ChannelHandlerOverdue extends ChannelHandler {
 
     @Override
     public boolean tryCommand(ThingHandler parentHandler, String channelId, Command command) {
-
-        if (CHANNEL_NAME.equals(channelId)) {
-            return true;
-        }
-
-        return false;
+        return CHANNEL_NAME.equals(channelId) ? true : false;
     }
 }

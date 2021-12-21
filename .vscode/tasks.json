@@ -2,15 +2,17 @@
     "version": "2.0.0",
     "options": {
         "env": {
-            "openhab_home": "c:/openhab",
-            "openhab_runtime": "c:/openhab/runtime",
-            "openhab_addons": "c:/openhab/addons",
-            "openhab_logs": "C:/openhab/userdata/logs",
+            "openhab_home": "c:/openhab-3.2",
+            "openhab_runtime": "c:/openhab-3.2/runtime",
+            "openhab_addons": "c:/openhab-3.2/addons",
+            "openhab_logs": "C:/openhab-3.2/userdata/logs",
             "JAVA_HOME": "C:/Program Files/Zulu/zulu-11/",
             "JAVA": "%JAVA_HOME%bin/java",
             "PATH": "C:/Program Files/Zulu/zulu-11/bin/;c:/utilities/apache-maven-3.8.4/bin",
-            "MAVEN_TERMINATE_CMD": "on",
-            "dist": "org.openhab.binding.ccaedio-3.2.0-SNAPSHOT.jar"
+            "OPENHAB_HTTP_PORT": "8081",
+            "OPENHAB_HTTPS_PORT": "8444",
+            "OPENHAB_JAVA_DEBUG_PORT": "5006",
+            "MAVEN_TERMINATE_CMD": "on"
         }
     },
     "tasks": [
@@ -98,7 +100,7 @@
             "windows": {
                 "command": "Copy-Item",
                 "args": [
-                    "${workspaceFolder}/target/org.openhab.binding.ccaedio-3.1.2-SNAPSHOT.jar",
+                    "${workspaceFolder}/target/org.openhab.binding.ccaedio-3.2.0.jar",
                     "$env:openhab_addons"
                 ]
             },

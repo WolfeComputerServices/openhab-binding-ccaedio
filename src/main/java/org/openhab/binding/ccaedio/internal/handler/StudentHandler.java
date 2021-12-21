@@ -73,7 +73,6 @@ public class StudentHandler extends BaseThingHandler implements ICCAThingHandler
 
     @Override
     public void initialize() {
-
         logger.debug("CCA Edio Handler initialization started");
         Bridge bridge = getBridge();
         if (bridge == null) {

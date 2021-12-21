@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="yes"?>
-<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="org.openhab.binding.ccaedio-3.1.2-SNAPSHOT">
-    <repository>mvn:org.openhab.core.features.karaf/org.openhab.core.features.karaf.openhab-core/3.1.2-SNAPSHOT/xml/features</repository>
-    <feature name="openhab-binding-ccaedio" description="CCAEdio Binding" version="3.1.2.SNAPSHOT">
+<features xmlns="http://karaf.apache.org/xmlns/features/v1.6.0" name="org.openhab.binding.ccaedio-3.2.0">
+    <repository>mvn:org.openhab.core.features.karaf/org.openhab.core.features.karaf.openhab-core/3.2.0/xml/features</repository>
+    <feature name="openhab-binding-ccaedio" description="CCAEdio Binding" version="3.2.0">
         <feature>openhab-runtime-base</feature>
-        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.ccaedio/3.1.2-SNAPSHOT</bundle>
+        <bundle start-level="80">mvn:org.openhab.addons.bundles/org.openhab.binding.ccaedio/3.2.0</bundle>
     </feature>
-    <feature name="org.openhab.binding.ccaedio" description="openHAB Add-ons :: Bundles :: CCAEdio Binding" version="3.1.2.SNAPSHOT">
+    <feature name="org.openhab.binding.ccaedio" description="openHAB Add-ons :: Bundles :: CCAEdio Binding" version="3.2.0">
         <details>This project contains the official add-ons of openHAB</details>
         <feature prerequisite="true" dependency="false">wrap</feature>
         <bundle start-level="80">wrap:mvn:com.wolfecomputerservices/EdioAPI/2.0</bundle>

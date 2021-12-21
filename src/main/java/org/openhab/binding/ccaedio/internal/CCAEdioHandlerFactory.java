@@ -90,8 +90,9 @@ public class CCAEdioHandlerFactory extends BaseThingHandlerFactory {
 
     public static void updateHandlers() {
         handlers.stream().forEach(h -> {
-            if (((ThingHandler) h).getThing().getStatus() == ThingStatus.ONLINE)
+            if (((ThingHandler) h).getThing().getStatus() == ThingStatus.ONLINE) {
                 h.update();
+            }
         });
     }
 

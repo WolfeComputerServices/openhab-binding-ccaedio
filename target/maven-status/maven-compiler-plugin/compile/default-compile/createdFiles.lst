@@ -1,4 +1,3 @@
-NOTICE
 org\openhab\binding\ccaedio\internal\handler\AccountBridgeHandler.class
 org\openhab\binding\ccaedio\internal\handler\StudentHandler.class
 org\openhab\binding\ccaedio\internal\handler\AccountHandlerConfig.class

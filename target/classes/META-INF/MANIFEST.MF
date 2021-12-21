@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.openhab.binding.ccaedio
-Bnd-LastModified: 1640028327111
+Bnd-LastModified: 1640109926437
 Bundle-Description: This project contains the official add-ons of open
  HAB
 Bundle-Developers: openhab;email="info@openhab.org";name=openHAB;organ
@@ -17,14 +17,14 @@ Bundle-SCM: url="https://github.com/openhab/openhab-addons/org.openhab
  git:https://github.com/openhab/openhab-addons.git/org.openhab.addons.
  reactor.bundles/org.openhab.binding.ccaedio",developer-connection="sc
  m:git:https://github.com/openhab/openhab-addons.git/org.openhab.addon
- s.reactor.bundles/org.openhab.binding.ccaedio",tag="3.1.0"
+ s.reactor.bundles/org.openhab.binding.ccaedio",tag="3.2.0"
 Bundle-SymbolicName: org.openhab.binding.ccaedio
 Bundle-Vendor: openHAB.org
-Bundle-Version: 3.1.2.202112201925
-Created-By: 11.0.13 (Azul Systems, Inc.)
+Bundle-Version: 3.2.0
+Created-By: 11.0.12 (Oracle Corporation)
 Export-Package: org.openhab.channhandler;uses:="com.google.gson,org.op
  enhab.core.thing.binding,org.openhab.core.types,org.slf4j";version="3
- .1.2"
+ .2.0"
 Import-Package: org.openhab.core.config.core,org.openhab.core.config.d
  iscovery,org.openhab.core.library.types,org.openhab.core.storage,org.
  openhab.core.thing,org.openhab.core.thing.binding,org.openhab.core.ty
@@ -46,5 +46,5 @@ Require-Capability: osgi.service;filter:="(objectClass=org.openhab.cor
  (version>=2.0.0)))",osgi.ee;filter:="(&(osgi.ee=JavaSE)(version=11))"
 Service-Component: OSGI-INF/org.openhab.binding.ccaedio.internal.CCAEd
  ioHandlerFactory.xml
-Tool: Bnd-5.3.0.202102221516
+Tool: Bnd-6.1.0.202111221555
 

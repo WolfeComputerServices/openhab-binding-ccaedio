@@ -101,8 +101,9 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         // "Could not control device at IP address x.x.x.x");
         logger.trace("Command '{}' received for channel '{}'", command, channelUID);
         for (ChannelHandler handler : channelHandlers) {
-            if (handler.tryCommand(this, channelUID.getId(), command))
+            if (handler.tryCommand(this, channelUID.getId(), command)) {
                 return;
+            }
         }
 
         if (command instanceof RefreshType) {
@@ -139,8 +140,9 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         scheduler.execute(() -> {
             ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
             ZonedDateTime nextRun = now.withHour(0).withMinute(30).withSecond(0);
-            if (now.compareTo(nextRun) > 0)
+            if (now.compareTo(nextRun) > 0) {
                 nextRun = nextRun.plusDays(1);
+            }
 
             Duration duration = Duration.between(now, nextRun);
             long initialDelay = duration.getSeconds();
@@ -152,8 +154,9 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
                 daily = null;
             }
             daily = scheduler.scheduleWithFixedDelay(() -> {
-                if (getThing().getStatus() == ThingStatus.ONLINE)
+                if (getThing().getStatus() == ThingStatus.ONLINE) {
                     CCAEdioHandlerFactory.updateHandlers();
+                }
             }, initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
             updateStatus(ThingStatus.ONLINE);
             updateChannels();
