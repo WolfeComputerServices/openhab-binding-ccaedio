@@ -63,6 +63,7 @@ public class StudentHandler extends BaseThingHandler implements ICCAThingHandler
 
     @Override
     public void update() {
+        logger.trace("Updating");
         updateChannels();
     }
 
@@ -103,6 +104,9 @@ public class StudentHandler extends BaseThingHandler implements ICCAThingHandler
                 Upcoming[] upcoming = edioBridge.getUpcomingEvents(studentName);
                 updateChannelState(CCAEdioBindingConstants.CHANNEL_UPCOMING, new StringType(
                         String.format("{ \"student\": \"%s\", \"upcoming\": %s}", studentName, gson.toJson(upcoming))));
+
+                logger.debug(
+                        String.format("Edio data: %s: %s: %s", studentName, overdue.toString(), upcoming.toString()));
             }
         }
     }

@@ -35,6 +35,8 @@ import org.osgi.service.component.annotations.Activate;
 import org.osgi.service.component.annotations.Component;
 import org.osgi.service.component.annotations.Reference;
 import org.osgi.service.http.HttpService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.google.gson.Gson;
 
@@ -48,6 +50,7 @@ import com.google.gson.Gson;
 @Component(configurationPid = "binding.ccaedio", service = ThingHandlerFactory.class)
 public class CCAEdioHandlerFactory extends BaseThingHandlerFactory {
 
+    private static final Logger logger = LoggerFactory.getLogger(CCAEdioHandlerFactory.class);
     private final Set<AccountBridgeHandler> accountHandlers = new HashSet<>();
     private static final Gson gson = new Gson();
 
@@ -91,6 +94,7 @@ public class CCAEdioHandlerFactory extends BaseThingHandlerFactory {
     public static void updateHandlers() {
         handlers.stream().forEach(h -> {
             if (((ThingHandler) h).getThing().getStatus() == ThingStatus.ONLINE) {
+                logger.debug(String.format("Running update on %s", ((ThingHandler) h).getThing().getUID().toString()));
                 h.update();
             }
         });

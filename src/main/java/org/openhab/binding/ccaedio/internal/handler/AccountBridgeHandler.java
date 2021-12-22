@@ -84,6 +84,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
             if (!localDaily.isCancelled()) {
                 localDaily.cancel(true);
                 daily = null;
+                logger.debug("Daily timer canceled and destroyed");
             }
         }
     }
@@ -115,10 +116,12 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
     private void updateChannels() {
         Boolean hasSchoolToday = edioBridge.hasSchoolToday();
         updateChannelState(CCAEdioBindingConstants.CHANNEL_HAS_SCHOOL, hasSchoolToday ? OnOffType.ON : OnOffType.OFF);
+        logger.debug(String.format("Edio data: %s", hasSchoolToday.toString()));
     }
 
     @Override
     public void update() {
+        logger.trace("Updating");
         updateChannels();
     }
 
@@ -152,31 +155,23 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
             if (localDaily != null) {
                 localDaily.cancel(true);
                 daily = null;
+                logger.debug("Daily timer canceled and destroyed");
             }
             daily = scheduler.scheduleWithFixedDelay(() -> {
+                logger.debug("Running daily update");
                 if (getThing().getStatus() == ThingStatus.ONLINE) {
                     CCAEdioHandlerFactory.updateHandlers();
                 }
             }, initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
+            logger.debug(String.format("Daily timer created: delayed %d hours", (initialDelay / 60) / 60));
             updateStatus(ThingStatus.ONLINE);
             updateChannels();
         });
-
-        // These logging types should be primarily used by bindings
-        // logger.trace("Example trace message");
-        // logger.debug("Example debug message");
-        // logger.warn("Example warn message");
-
-        // Note: When initialization can NOT be done set the status with more details for further
-        // analysis. See also class ThingStatusDetail for all available status details.
-        // Add a description to give user information to understand why thing does not work as expected. E.g.
-        // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.CONFIGURATION_ERROR,
-        // "Can not access device as username and/or password are invalid");
     }
 
     @Override
     public void updateChannelState(String channelId, State state) {
-        logger.trace("Updating {} to {}", channelId, state.toString());
+        logger.debug("Updating {} to {}", channelId, state.toString());
         updateState(channelId, state);
     }
 
@@ -184,16 +179,6 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         return edioBridge.getStudents();
     }
 
-    /*
-     * @Deprecated
-     * private List<Student> toStudentList(Map<String, Student> studentMap) {
-     * List<Student> studentList = new ArrayList<>();
-     * 
-     * studentMap.forEach((name, id) -> studentList.add(new Student(name, id)));
-     * 
-     * return studentList;
-     * }
-     */
     @Override
     public Object getConfigProperty(String propertyName) {
         return getConfig().get(propertyName);

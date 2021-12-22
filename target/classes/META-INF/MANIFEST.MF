@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Automatic-Module-Name: org.openhab.binding.ccaedio
-Bnd-LastModified: 1640109926437
+Bnd-LastModified: 1640181570608
 Bundle-Description: This project contains the official add-ons of open
  HAB
 Bundle-Developers: openhab;email="info@openhab.org";name=openHAB;organ
@@ -21,7 +21,7 @@ Bundle-SCM: url="https://github.com/openhab/openhab-addons/org.openhab
 Bundle-SymbolicName: org.openhab.binding.ccaedio
 Bundle-Vendor: openHAB.org
 Bundle-Version: 3.2.0
-Created-By: 11.0.12 (Oracle Corporation)
+Created-By: 11.0.13 (Azul Systems, Inc.)
 Export-Package: org.openhab.channhandler;uses:="com.google.gson,org.op
  enhab.core.thing.binding,org.openhab.core.types,org.slf4j";version="3
  .2.0"
