@@ -142,7 +142,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         // Example for background initialization:
         scheduler.execute(() -> {
             ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
-            ZonedDateTime nextRun = now.withHour(0).withMinute(30).withSecond(0);
+            ZonedDateTime nextRun = now.withHour(5).withMinute(30).withSecond(0);
             if (now.compareTo(nextRun) > 0) {
                 nextRun = nextRun.plusDays(1);
             }

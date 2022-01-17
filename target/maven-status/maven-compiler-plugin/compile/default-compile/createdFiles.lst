@@ -1,9 +1,12 @@
-NOTICE
+org\openhab\binding\ccaedio\internal\handler\AccountBridgeHandler.class
 org\openhab\binding\ccaedio\internal\handler\StudentHandler.class
+org\openhab\binding\ccaedio\internal\handler\AccountHandlerConfig.class
 org\openhab\channhandler\ChannelHandlerHasSchool.class
 org\openhab\channhandler\ChannelHandlerUpcomingEvents.class
 org\openhab\channhandler\ICCAThingHandler.class
-META-INF\MANIFEST.MF
 org\openhab\channhandler\ChannelHandler.class
-OSGI-INF\org.openhab.binding.ccaedio.internal.CCAEdioHandlerFactory.xml
+org\openhab\binding\ccaedio\internal\CCAEdioHandlerFactory.class
 org\openhab\channhandler\ChannelHandlerOverdue.class
+org\openhab\binding\ccaedio\internal\CCAEdioBindingConstants.class
+org\openhab\binding\ccaedio\internal\CCAEdioDiscovery.class
+org\openhab\binding\ccaedio\internal\EdioAPIBridge.class
