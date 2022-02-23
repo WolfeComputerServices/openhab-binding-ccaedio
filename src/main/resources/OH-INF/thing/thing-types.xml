@@ -10,6 +10,7 @@
 
 		<channels>
 			<channel id="hasSchool" typeId="hasSchool-channel"/>
+			<channel id="update" typeId="update-channel"/>
 		</channels>
 		<config-description>
 			<parameter name="username" type="text" required="true">
@@ -52,12 +53,18 @@
 		</config-description>
 	</thing-type>
 
-	<!-- Sample Channel Type -->
 	<channel-type id="hasSchool-channel">
 		<item-type>Switch</item-type>
 		<label>School is Open</label><!-- Use uppercase words, except prepositions. 2-3 words, max 25 chars -->
 		<description>Indicates if school is open or closed</description>
 		<state readOnly="true"/>
+	</channel-type>
+
+	<channel-type id="update-channel">
+		<item-type>Switch</item-type>
+		<label>Update School Data</label>
+		<description>Update all data related to this connection</description>
+		<state readOnly="false"/>
 	</channel-type>
 
 	<channel-type id="overdueEvents-channel">

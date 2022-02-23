@@ -13,6 +13,7 @@
 package org.openhab.channhandler;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
+import org.openhab.binding.ccaedio.internal.handler.AccountBridgeHandler;
 import org.openhab.core.types.State;
 
 /**

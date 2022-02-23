@@ -1,28 +1,13 @@
 {
     "version": "2.0.0",
-    "options": {
-        "env": {
-            "openhab_home": "c:/openhab-3.2",
-            "openhab_runtime": "c:/openhab-3.2/runtime",
-            "openhab_addons": "c:/openhab-3.2/addons",
-            "openhab_logs": "C:/openhab-3.2/userdata/logs",
-            "JAVA_HOME": "C:/Program Files/Zulu/zulu-11/",
-            "JAVA": "%JAVA_HOME%bin/java",
-            "PATH": "C:/Program Files/Zulu/zulu-11/bin/;c:/utilities/apache-maven-3.8.4/bin",
-            "OPENHAB_HTTP_PORT": "8081",
-            "OPENHAB_HTTPS_PORT": "8444",
-            "OPENHAB_JAVA_DEBUG_PORT": "5006",
-            "MAVEN_TERMINATE_CMD": "on"
-        }
-    },
     "tasks": [
         {
             "label": "Start openHAB (Debug)",
             "type": "shell",
             "isBackground": true,
-            "command": "$openhab_home/start.sh debug",
+            //"command": "$openhab_home/start.sh debug",
             "windows": {
-                "command": "& $env:openhab_home/run.cmd"
+                "command": "& ${config:openhab_home}/start_debug.bat"
             },
             "presentation": {
                 "reveal": "always",
@@ -33,9 +18,9 @@
         {
             "label": "Stop openHAB",
             "type": "shell",
-            "command": "$openhab_runtime/bin/stop",
+            //"command": "$openhab_runtime/bin/stop",
             "windows": {
-                "command": "& $env:openhab_runtime/bin/stop.bat"
+                "command": "& ${config:openhab_runtime}/bin/stop.bat"
             },
             "problemMatcher": []
         },
@@ -79,7 +64,7 @@
             "type": "shell",
             "command": "mvn",
             "args": [
-                "-o",
+                //"-o",
                 "clean",
                 "install",
                 "-DskipChecks"
@@ -92,16 +77,16 @@
         {
             "label": "Copy Distribution to Addons",
             "type": "shell",
-            "command": "cp",
+            //"command": "cp",
             "args": [
                 "${workspaceFolder}/target/$dist",
-                "$openhab_addons"
+                "${config:openhab_addons}"
             ],
             "windows": {
                 "command": "Copy-Item",
                 "args": [
                     "${workspaceFolder}/target/org.openhab.binding.ccaedio-3.2.0.jar",
-                    "$env:openhab_addons"
+                    "${config:openhab_addons}"
                 ]
             },
             "dependsOn": [
@@ -123,20 +108,20 @@
         {
             "label": "Tail events.log",
             "type": "shell",
-            "command": "tail",
-            "args": [
-                "-n",
-                "50",
-                "-F",
-                "$openhab_logs/events.log"
-            ],
+            //"command": "tail",
+            //"args": [
+            //    "-n",
+            //    "50",
+            //    "-F",
+            //    "$openhab_logs/events.log"
+            //],
             "windows": {
                 "command": "Get-Content",
                 "args": [
                     "-Last",
                     "50",
                     "-Path",
-                    "$env:openhab_logs/events.log",
+                    "${config:openhab_logs}/events.log",
                     "-Wait"
                 ]
             },
@@ -149,20 +134,20 @@
         {
             "label": "Tail openhab.log",
             "type": "shell",
-            "command": "tail",
-            "args": [
-                "-n",
-                "50",
-                "-F",
-                "$openhab_logs/openhab.log"
-            ],
+            //"command": "tail",
+            //"args": [
+            //    "-n",
+            //    "50",
+            //    "-F",
+            //    "$openhab_logs/openhab.log"
+            //],
             "windows": {
                 "command": "Get-Content",
                 "args": [
                     "-Last",
                     "50",
                     "-Path",
-                    "$env:openhab_logs/openhab.log",
+                    "${config:openhab_logs}/openhab.log",
                     "-Wait"
                 ]
             },

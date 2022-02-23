@@ -12,24 +12,19 @@
  */
 package org.openhab.binding.ccaedio.internal.handler;
 
-import java.time.Duration;
-import java.time.ZoneId;
-import java.time.ZonedDateTime;
-import java.util.ArrayList;
 import java.util.Collection;
 import java.util.Collections;
+import java.util.Hashtable;
 import java.util.List;
-import java.util.concurrent.ScheduledFuture;
-import java.util.concurrent.TimeUnit;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
-import org.eclipse.jdt.annotation.Nullable;
 import org.openhab.binding.ccaedio.internal.CCAEdioBindingConstants;
 import org.openhab.binding.ccaedio.internal.CCAEdioDiscovery;
 import org.openhab.binding.ccaedio.internal.CCAEdioHandlerFactory;
 import org.openhab.binding.ccaedio.internal.EdioAPIBridge;
 import org.openhab.channhandler.ChannelHandler;
 import org.openhab.channhandler.ChannelHandlerHasSchool;
+import org.openhab.channhandler.ChannelHandlerUpdate;
 import org.openhab.channhandler.ICCAThingHandler;
 import org.openhab.core.library.types.OnOffType;
 import org.openhab.core.thing.Bridge;
@@ -59,9 +54,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
     private final EdioAPIBridge edioBridge;
     private final Gson gson;
 
-    private static @Nullable ScheduledFuture<?> daily;
-
-    private List<ChannelHandler> channelHandlers = new ArrayList<>();
+    private Hashtable<String, ChannelHandler> channelHandlers = new Hashtable<>();
 
     public AccountBridgeHandler(Bridge bridge, Gson gson) {
         super(bridge);
@@ -79,14 +72,16 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
 
     @Override
     public void dispose() {
-        ScheduledFuture<?> localDaily = daily;
-        if (localDaily != null) {
-            if (!localDaily.isCancelled()) {
-                localDaily.cancel(true);
-                daily = null;
-                logger.debug("Daily timer canceled and destroyed");
-            }
-        }
+        /*
+         * ScheduledFuture<?> localDaily = daily;
+         * if (localDaily != null) {
+         * if (!localDaily.isCancelled()) {
+         * localDaily.cancel(true);
+         * daily = null;
+         * logger.debug("Daily timer canceled and destroyed");
+         * }
+         * }
+         */
     }
 
     @Override
@@ -100,12 +95,16 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         // indicate that by setting the status with detail information:
         // updateStatus(ThingStatus.OFFLINE, ThingStatusDetail.COMMUNICATION_ERROR,
         // "Could not control device at IP address x.x.x.x");
-        logger.trace("Command '{}' received for channel '{}'", command, channelUID);
-        for (ChannelHandler handler : channelHandlers) {
-            if (handler.tryCommand(this, channelUID.getId(), command)) {
+        // logger.trace("Command '{}' received for channel '{}'", command, channelUID);
+        String id = channelUID.getId();
+        if (channelHandlers.containsKey(id))
+            if (channelHandlers.get(id).tryCommand(this, id, command))
                 return;
-            }
-        }
+        // for (ChannelHandler handler : channelHandlers) {
+        // if (handler.tryCommand(this, channelUID.getId(), command)) {
+        // return;
+        // }
+        // }
 
         if (command instanceof RefreshType) {
             logger.trace("Refreshing data {}", getThing().getUID().getAsString());
@@ -113,7 +112,7 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
         }
     }
 
-    private void updateChannels() {
+    public void updateChannels() {
         Boolean hasSchoolToday = edioBridge.hasSchoolToday();
         updateChannelState(CCAEdioBindingConstants.CHANNEL_HAS_SCHOOL, hasSchoolToday ? OnOffType.ON : OnOffType.OFF);
         logger.debug(String.format("Edio data: %s", hasSchoolToday.toString()));
@@ -141,29 +140,29 @@ public class AccountBridgeHandler extends BaseBridgeHandler implements ICCAThing
 
         // Example for background initialization:
         scheduler.execute(() -> {
-            ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
-            ZonedDateTime nextRun = now.withHour(5).withMinute(30).withSecond(0);
-            if (now.compareTo(nextRun) > 0) {
-                nextRun = nextRun.plusDays(1);
-            }
-
-            Duration duration = Duration.between(now, nextRun);
-            long initialDelay = duration.getSeconds();
-
-            channelHandlers.add(new ChannelHandlerHasSchool(this, this.edioBridge, this.gson));
-            ScheduledFuture<?> localDaily = daily;
-            if (localDaily != null) {
-                localDaily.cancel(true);
-                daily = null;
-                logger.debug("Daily timer canceled and destroyed");
-            }
-            daily = scheduler.scheduleWithFixedDelay(() -> {
-                logger.debug("Running daily update");
-                if (getThing().getStatus() == ThingStatus.ONLINE) {
-                    CCAEdioHandlerFactory.updateHandlers();
-                }
-            }, initialDelay, TimeUnit.DAYS.toSeconds(1), TimeUnit.SECONDS);
-            logger.debug(String.format("Daily timer created: delayed %d hours", (initialDelay / 60) / 60));
+            /*
+             * ZonedDateTime now = ZonedDateTime.now(ZoneId.systemDefault());
+             * ZonedDateTime nextRun = now.withHour(5).withMinute(30).withSecond(0);
+             * if (now.compareTo(nextRun) > 0) {
+             * nextRun = nextRun.plusDays(1);
+             * }
+             * 
+             * Duration duration = Duration.between(now, nextRun);
+             * long initialDelay = duration.getSeconds();
+             */
+            channelHandlers.put(CCAEdioBindingConstants.CHANNEL_UPDATE,
+                    new ChannelHandlerUpdate(this, this.edioBridge, this.gson));
+            channelHandlers.put(CCAEdioBindingConstants.CHANNEL_HAS_SCHOOL,
+                    new ChannelHandlerHasSchool(this, this.edioBridge, this.gson));
+            /*
+             * ScheduledFuture<?> localDaily = daily;
+             * if (localDaily != null) {
+             * localDaily.cancel(true);
+             * daily = null;
+             * logger.debug("Daily timer canceled and destroyed");
+             * }
+             * logger.debug(String.format("Daily timer created: delayed %d hours", (initialDelay / 60) / 60));
+             */
             updateStatus(ThingStatus.ONLINE);
             updateChannels();
         });

@@ -43,6 +43,7 @@ public class CCAEdioBindingConstants {
     public static final String STUDENT_PROPERTY_NAME = "studentname";
 
     // List of all Channel ids
+    public static final String CHANNEL_UPDATE = "update";
     public static final String CHANNEL_HAS_SCHOOL = "hasSchool";
     public static final String CHANNEL_OVERDUES = "overdueEvents";
     public static final String CHANNEL_UPCOMING = "upcomingEvents";

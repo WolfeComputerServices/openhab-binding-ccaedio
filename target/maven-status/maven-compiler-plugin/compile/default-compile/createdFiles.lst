@@ -8,5 +8,6 @@ org\openhab\channhandler\ChannelHandler.class
 org\openhab\binding\ccaedio\internal\CCAEdioHandlerFactory.class
 org\openhab\channhandler\ChannelHandlerOverdue.class
 org\openhab\binding\ccaedio\internal\CCAEdioBindingConstants.class
+org\openhab\channhandler\ChannelHandlerUpdate.class
 org\openhab\binding\ccaedio\internal\CCAEdioDiscovery.class
 org\openhab\binding\ccaedio\internal\EdioAPIBridge.class

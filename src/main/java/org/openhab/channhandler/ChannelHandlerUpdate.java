@@ -14,29 +14,38 @@ package org.openhab.channhandler;
 
 import org.eclipse.jdt.annotation.NonNullByDefault;
 import org.openhab.binding.ccaedio.internal.CCAEdioBindingConstants;
+import org.openhab.binding.ccaedio.internal.CCAEdioHandlerFactory;
 import org.openhab.binding.ccaedio.internal.EdioAPIBridge;
+import org.openhab.core.library.types.OnOffType;
 import org.openhab.core.thing.binding.ThingHandler;
 import org.openhab.core.types.Command;
 
 import com.google.gson.Gson;
 
 /**
- * The {@link ChannelHandlerHasSchool} is responsible for the has school updating.
+ * The {@link ChannelHandlerUpdate} is responsible update data.
  *
  * @author Wolfe Computer Services - Initial contribution
  */
 @NonNullByDefault
-public class ChannelHandlerHasSchool extends ChannelHandler {
-    private static final String CHANNEL_NAME = CCAEdioBindingConstants.CHANNEL_HAS_SCHOOL;
+public class ChannelHandlerUpdate extends ChannelHandler {
+    private static final String CHANNEL_NAME = CCAEdioBindingConstants.CHANNEL_UPDATE;
 
-    // private final Logger logger = Logger.getLogger(ChannelHandlerHasSchool.class);
-
-    public ChannelHandlerHasSchool(ICCAThingHandler thingHandler, EdioAPIBridge edioBridge, Gson gson) {
+    public ChannelHandlerUpdate(ICCAThingHandler thingHandler, EdioAPIBridge edioBridge, Gson gson) {
         super(thingHandler, edioBridge, gson);
     }
 
     @Override
     public boolean tryCommand(ThingHandler parentHandler, String channelId, Command command) {
-        return CHANNEL_NAME.equals(channelId) ? true : false;
+        if (CHANNEL_NAME.equals(channelId)) {
+            if (command instanceof OnOffType) {
+                if (command == OnOffType.ON) {
+                    CCAEdioHandlerFactory.updateHandlers();
+                    thingHandler.updateChannelState(CHANNEL_NAME, OnOffType.OFF);
+                }
+            }
+        }
+
+        return false;
     }
 }

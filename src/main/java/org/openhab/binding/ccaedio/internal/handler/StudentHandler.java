@@ -99,11 +99,10 @@ public class StudentHandler extends BaseThingHandler implements ICCAThingHandler
                 String studentName = (String) getConfig().get(CCAEdioBindingConstants.STUDENT_PROPERTY_NAME);
                 Overdue[] overdue = edioBridge.getOverdues(studentName);
                 updateChannelState(CCAEdioBindingConstants.CHANNEL_OVERDUES, new StringType(
-                        String.format("{ \"student\": \"%s\", \"overdue\": %s}", studentName, gson.toJson(overdue))));
-
+                        String.format("{'student':'%s','overdue':%s}", studentName, gson.toJson(overdue))));
                 Upcoming[] upcoming = edioBridge.getUpcomingEvents(studentName);
                 updateChannelState(CCAEdioBindingConstants.CHANNEL_UPCOMING, new StringType(
-                        String.format("{ \"student\": \"%s\", \"upcoming\": %s}", studentName, gson.toJson(upcoming))));
+                        String.format("{'student':'%s','upcoming':%s}", studentName, gson.toJson(upcoming))));
 
                 logger.debug(
                         String.format("Edio data: %s: %s: %s", studentName, overdue.toString(), upcoming.toString()));
